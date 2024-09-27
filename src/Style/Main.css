@@ -1,0 +1,68 @@
+.clock-slider {
+  max-width: 900px;
+  margin: 50px auto;
+  background: #ffffff;
+  border-radius: 15px;
+  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); */
+  padding: 20px;
+  text-align: center;
+}
+
+.clock-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.clock-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  color: #555;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clock-button:hover {
+  background-color: #007bff;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.clock-button.active {
+  background-color: #007bff;
+  color: #ffffff;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.clock-display {
+  padding: 20px;
+  background-color: orange;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 600px) {
+  .clock-buttons {
+      flex-direction: column;
+  }
+
+  .clock-button {
+      margin: 10px 0;
+      width: 100%;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+  /* background-color: #007bff; */
+  color: black;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}

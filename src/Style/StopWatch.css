@@ -1,0 +1,130 @@
+/* General Styling */
+  
+  .stopwatch-container {
+    background-color: orange;
+    border-radius: 12px;
+    padding: 40px;
+    /* max-width: 450px; */
+    margin: 40px auto;
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
+    text-align: center;
+  }
+  
+  .stopwatch-heading {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Timer */
+  .stopwatch-time-wrapper {
+    background: #e8f1f2;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+  }
+  
+  .stopwatch-time {
+    font-size: 48px;
+    font-weight: 700;
+    color: #007bff;
+  }
+  
+  /* Buttons */
+  .stopwatch-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .stopwatch-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .stopwatch-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .stop {
+    background-color: #dc3545;
+  }
+  
+  .stop:hover {
+    background-color: #c82333;
+  }
+  
+  .reset {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  .reset:hover {
+    background-color: #e0a800;
+  }
+  
+  /* Gym Section */
+  .gym-section {
+    margin-top: 20px;
+  }
+  
+  .gym-section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .gym-options {
+    margin-top: 20px;
+  }
+  
+  .gym-label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .workout-select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .calories-info {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .workout-gif {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 12px;
+  }
+  

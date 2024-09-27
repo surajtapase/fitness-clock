@@ -1,0 +1,71 @@
+
+
+.clock-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+.clock-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-glow {
+  position: absolute;
+  font-size: 32px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.4);
+  animation: glow 2s infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 40px rgba(0, 255, 255, 0.8);
+  }
+}
+
+.progress-ring__circle {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.weather-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.weather-details img {
+  vertical-align: middle;
+}
+
+.loading-message {
+  color: #fff;
+  font-size: 18px;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
