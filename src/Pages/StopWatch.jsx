@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import "../Style/StopWatch.css";
 import Crunches from "../Img/Crunches.gif";
 import Plank from "../Img/plank-up-down.gif";
@@ -13,30 +13,33 @@ const Stopwatch = () => {
   const [caloriesBurned, setCaloriesBurned] = useState(0);
   const intervalRef = useRef(null);
 
-  const calculateCaloriesBurned = (time) => {
-    let calories = 0;
-    const timeInMinutes = time / 60000;
-    const userWeight = parseFloat(weight);
+  const calculateCaloriesBurned = useCallback(
+    (time) => {
+      let calories = 0;
+      const timeInMinutes = time / 60000;
+      const userWeight = parseFloat(weight);
 
-    if (workoutType === "plank") {
-      if (userWeight >= 50 && userWeight <= 60) {
-        calories = 2 * timeInMinutes;
-      } else if (userWeight > 60 && userWeight <= 75) {
-        calories = (3 + Math.random()) * timeInMinutes;
-      } else if (userWeight > 75) {
-        calories = (4 + Math.random()) * timeInMinutes;
+      if (workoutType === "plank") {
+        if (userWeight >= 50 && userWeight <= 60) {
+          calories = 2 * timeInMinutes;
+        } else if (userWeight > 60 && userWeight <= 75) {
+          calories = (3 + Math.random()) * timeInMinutes;
+        } else if (userWeight > 75) {
+          calories = (4 + Math.random()) * timeInMinutes;
+        }
+      } else if (workoutType === "cycling") {
+        const averageCaloriesPerHour = 716;
+        const caloriesPerMinute = averageCaloriesPerHour / 60;
+        calories = caloriesPerMinute * timeInMinutes;
+      } else if (workoutType === "crunches") {
+        const caloriesPerMinute = 5;
+        calories = caloriesPerMinute * timeInMinutes;
       }
-    } else if (workoutType === "cycling") {
-      const averageCaloriesPerHour = 716;
-      const caloriesPerMinute = averageCaloriesPerHour / 60;
-      calories = caloriesPerMinute * timeInMinutes;
-    } else if (workoutType === "crunches") {
-      const caloriesPerMinute = 5;
-      calories = caloriesPerMinute * timeInMinutes;
-    }
 
-    setCaloriesBurned(calories.toFixed(2));
-  };
+      setCaloriesBurned(calories.toFixed(2));
+    },
+    [weight, workoutType]
+  );
 
   useEffect(() => {
     return () => {
@@ -56,7 +59,9 @@ const Stopwatch = () => {
     } else {
       clearInterval(intervalRef.current);
     }
-  }, [isRunning, elapsedTime]);
+
+    return () => clearInterval(intervalRef.current);
+  }, [isRunning, elapsedTime, calculateCaloriesBurned]);
 
   const startStopwatch = () => {
     setIsRunning(true);
@@ -92,7 +97,9 @@ const Stopwatch = () => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60000);
     const seconds = ((time % 60000) / 1000).toFixed(2);
-    return `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    return `${minutes < 10 ? "0" : ""}${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}`;
   };
 
   return (
@@ -117,7 +124,10 @@ const Stopwatch = () => {
       </div>
 
       <div className="gym-section">
-        <h3 className="gym-section-title" onClick={() => setShowGymOptions(!showGymOptions)}>
+        <h3
+          className="gym-section-title"
+          onClick={() => setShowGymOptions(!showGymOptions)}
+        >
           Select Workout
         </h3>
 
@@ -154,7 +164,13 @@ const Stopwatch = () => {
                 </p>
 
                 <img
-                  src={workoutType === "plank" ? Plank : workoutType === "cycling" ? Cycle : Crunches}
+                  src={
+                    workoutType === "plank"
+                      ? Plank
+                      : workoutType === "cycling"
+                      ? Cycle
+                      : Crunches
+                  }
                   alt={`${workoutType} workout`}
                   className="workout-gif"
                 />
