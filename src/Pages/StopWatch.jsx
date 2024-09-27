@@ -13,6 +13,31 @@ const Stopwatch = () => {
   const [caloriesBurned, setCaloriesBurned] = useState(0);
   const intervalRef = useRef(null);
 
+  const calculateCaloriesBurned = (time) => {
+    let calories = 0;
+    const timeInMinutes = time / 60000;
+    const userWeight = parseFloat(weight);
+
+    if (workoutType === "plank") {
+      if (userWeight >= 50 && userWeight <= 60) {
+        calories = 2 * timeInMinutes;
+      } else if (userWeight > 60 && userWeight <= 75) {
+        calories = (3 + Math.random()) * timeInMinutes;
+      } else if (userWeight > 75) {
+        calories = (4 + Math.random()) * timeInMinutes;
+      }
+    } else if (workoutType === "cycling") {
+      const averageCaloriesPerHour = 716;
+      const caloriesPerMinute = averageCaloriesPerHour / 60;
+      calories = caloriesPerMinute * timeInMinutes;
+    } else if (workoutType === "crunches") {
+      const caloriesPerMinute = 5;
+      calories = caloriesPerMinute * timeInMinutes;
+    }
+
+    setCaloriesBurned(calories.toFixed(2));
+  };
+
   useEffect(() => {
     return () => {
       clearInterval(intervalRef.current);
@@ -31,7 +56,7 @@ const Stopwatch = () => {
     } else {
       clearInterval(intervalRef.current);
     }
-  }, [isRunning]);
+  }, [isRunning, elapsedTime]);
 
   const startStopwatch = () => {
     setIsRunning(true);
@@ -64,37 +89,10 @@ const Stopwatch = () => {
     calculateCaloriesBurned(elapsedTime);
   };
 
-  const calculateCaloriesBurned = (time) => {
-    let calories = 0;
-    const timeInMinutes = time / 60000;
-    const userWeight = parseFloat(weight);
-
-    if (workoutType === "plank") {
-      if (userWeight >= 50 && userWeight <= 60) {
-        calories = 2 * timeInMinutes;
-      } else if (userWeight > 60 && userWeight <= 75) {
-        calories = (3 + Math.random()) * timeInMinutes;
-      } else if (userWeight > 75) {
-        calories = (4 + Math.random()) * timeInMinutes;
-      }
-    } else if (workoutType === "cycling") {
-      const averageCaloriesPerHour = 716;
-      const caloriesPerMinute = averageCaloriesPerHour / 60;
-      calories = caloriesPerMinute * timeInMinutes;
-    } else if (workoutType === "crunches") {
-      const caloriesPerMinute = 5;
-      calories = caloriesPerMinute * timeInMinutes;
-    }
-
-    setCaloriesBurned(calories.toFixed(2));
-  };
-
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60000);
     const seconds = ((time % 60000) / 1000).toFixed(2);
-    return `${minutes < 10 ? "0" : ""}${minutes}:${
-      seconds < 10 ? "0" : ""
-    }${seconds}`;
+    return `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
   return (
